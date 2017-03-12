@@ -18,20 +18,27 @@ public class SecurityUtilsTest {
 
   @Test() public void TestGetAccountFromCredentials() {
     final String username = "fakeuser";
-    Collection<GrantedAuthority> roles = new ArrayList<>();
-    final SimpleGrantedAuthority role1 = new SimpleGrantedAuthority("ROLE_TEST_USER");
-    final SimpleGrantedAuthority role2 = new SimpleGrantedAuthority("ROLE_QA");
-    roles.add(role1);
-    roles.add(role2);
-    final Account account = SecurityUtils.getAccountFromCredentials(username, roles);
+    Collection<GrantedAuthority> authorities = new ArrayList<>();
+    final SimpleGrantedAuthority authority1 = new SimpleGrantedAuthority("ROLE_TEST_USER");
+    final SimpleGrantedAuthority authority2 = new SimpleGrantedAuthority("ROLE_QA");
+    authorities.add(authority1);
+    authorities.add(authority2);
+    final Account account = SecurityUtils.getAccountFromCredentials(username, authorities);
     assertEquals(username, account.getUsername());
     assertEquals(Arrays.asList("ROLE_TEST_USER", "ROLE_QA"), account.getAuthorities());
   }
 
   @Test() public void TestGetAccountFromTokenObject() {
-    final Object tokenObj = "{\"username\":\"fakeuser\",\"authorities\":[\"ROLE_TEST_USER\",\"ROLE_QA\"]}";
-    final Account account = SecurityUtils.getAccountFromTokenObject(tokenObj);
-    assertEquals("fakeuser", account.getUsername());
-    assertEquals(Arrays.asList("ROLE_TEST_USER", "ROLE_QA"), account.getAuthorities());
+    final String username = "fakeuser";
+    Collection<GrantedAuthority> authorities = new ArrayList<>();
+    final SimpleGrantedAuthority authority1 = new SimpleGrantedAuthority("ROLE_TEST_USER");
+    final SimpleGrantedAuthority authority2 = new SimpleGrantedAuthority("ROLE_QA");
+    authorities.add(authority1);
+    authorities.add(authority2);
+    final Account account = SecurityUtils.getAccountFromCredentials(username, authorities);
+
+    final Account accountReceived = SecurityUtils.getAccountFromTokenObject(account);
+    assertEquals("fakeuser", accountReceived.getUsername());
+    assertEquals(account.getAuthorities(), accountReceived.getAuthorities());
   }
 }

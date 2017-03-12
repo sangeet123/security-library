@@ -14,10 +14,10 @@ public class SecurityUtils {
   private static final ObjectMapper oMapper = new ObjectMapper();
 
   public static Account getAccountFromCredentials(final String username,
-      final Collection<? extends GrantedAuthority> roles) {
+      final Collection<? extends GrantedAuthority> authorities) {
     final Account account = new Account();
     return account.setAuthorities(
-        roles.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
+        authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
         .setUsername(username);
   }
 
