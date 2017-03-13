@@ -6,6 +6,7 @@ import java.util.List;
  * Created by sangeet on 3/9/2017.
  */
 public class Account {
+  private long id;
   private String username;
   private List<String> authorities;
 
@@ -15,6 +16,15 @@ public class Account {
 
   public Account setUsername(final String username) {
     this.username = username;
+    return this;
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public Account setId(long id) {
+    this.id = id;
     return this;
   }
 
