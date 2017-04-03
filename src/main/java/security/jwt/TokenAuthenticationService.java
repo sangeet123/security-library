@@ -49,11 +49,11 @@ import java.util.stream.Collectors;
       final Object accountObj = Jwts.parser().setSigningKey(TokenConfig.getSecretKey())
           .parseClaimsJws(token).getBody().get(USER_ACCOUNT);
       final Account account = SecurityUtils.getAccountFromTokenObject(accountObj);
+      request.setAttribute("userId", account.getId());
       return new AuthenticatedUser(account.getUsername(),
           account.getAuthorities().stream().map(role -> new SimpleGrantedAuthority(role))
               .collect(Collectors.toList()));
     } catch (final Exception ex) {
-      //log the exception
       return null;
     }
   }
