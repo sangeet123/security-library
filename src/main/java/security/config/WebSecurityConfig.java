@@ -1,7 +1,7 @@
 package security.config;
 
-import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +17,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import security.jwt.JWTAuthenticationFilter;
 import security.jwt.JWTLoginFilter;
 
+import javax.sql.DataSource;
+
 /**
  * Created by sangeet on 3/6/2017.
  */
@@ -26,7 +28,7 @@ import security.jwt.JWTLoginFilter;
   private final String USER_NAME_BY_USER_NAME_QUERY = "select username,password, enabled from users where username=?";
   private final String AUTHORITIES_BY_USER_NAME_QUERY = "select username, role from user_roles where username=?";
 
-  @Autowired() private DataSource dataSource;
+  @Autowired() @Qualifier("userDataSource") private DataSource dataSource;
 
   protected void configure(final HttpSecurity http) throws Exception {
     // disable caching

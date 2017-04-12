@@ -6,8 +6,10 @@ import java.util.List;
  * Created by sangeet on 3/9/2017.
  */
 public class Account {
-  private long id;
+  private Long id;
   private String username;
+  private String firstName;
+  private String lastName;
   private List<String> authorities;
 
   public String getUsername() {
@@ -19,11 +21,11 @@ public class Account {
     return this;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public Account setId(long id) {
+  public Account setId(Long id) {
     this.id = id;
     return this;
   }
@@ -34,6 +36,24 @@ public class Account {
 
   public Account setAuthorities(final List<String> authorities) {
     this.authorities = authorities;
+    return this;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public Account setFirstName(final String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public Account setLastName(final String lastName) {
+    this.lastName = lastName;
     return this;
   }
 }

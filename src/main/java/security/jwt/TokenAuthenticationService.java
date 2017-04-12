@@ -33,7 +33,8 @@ import java.util.stream.Collectors;
     //We will be collecting all the user info to generate jwt token
     //This is because we do not want to inspect database once authentication is done
     final User user = staticUserRepository.findByusername(username);
-    final Account account = SecurityUtils.getAccountFromCredentials(user.getUsername(),user.getId(), roles);
+    final Account account = SecurityUtils
+        .getAccountFromCredentials(user, roles);
     final String JWT = Jwts.builder().setSubject(username).claim(USER_ACCOUNT, account)
         .setExpiration(new Date(System.currentTimeMillis() + TokenConfig.getExpirationTime()))
         .signWith(SignatureAlgorithm.HS512, TokenConfig.getSecretKey()).compact();

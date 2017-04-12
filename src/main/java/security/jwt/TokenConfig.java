@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by sangeet on 3/9/2017.
  */
-@Component()public class TokenConfig {
+@Component() public class TokenConfig {
   public static final String SECRET_KEY = "${token.secretkey}";
   public static final String EXPIRATION_TIME_KEY = "${token.expirationtime}";
 
