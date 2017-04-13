@@ -35,6 +35,7 @@ import javax.sql.DataSource;
     http.headers().cacheControl();
 
     http.csrf().disable().authorizeRequests().
+        antMatchers(HttpMethod.POST, "/user").permitAll().
         antMatchers("/").permitAll().
         antMatchers(HttpMethod.POST, "/login").
         permitAll().antMatchers("/health/**").hasRole("APP_ADMIN").

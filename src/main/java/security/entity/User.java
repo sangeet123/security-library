@@ -7,16 +7,20 @@ import java.util.Collection;
 /**
  * Created by sangeet on 3/12/2017.
  */
-@Entity() @Table(name = "users", schema = "userdb") public class User implements Serializable {
+@Entity() @Table(name = "users", schema = "userdb", uniqueConstraints = {
+    @UniqueConstraint(columnNames = { "email" }),
+    @UniqueConstraint(columnNames = { "username" }) }) public class User implements Serializable {
   @Id() @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "id") public Long id;
 
-  @Column(name = "username", unique = true) public String username;
+  @Column(name = "username") public String username;
 
   @Column(name = "password") public String password;
 
-  @Column(name = "firstName") public String firstName;
+  @Column(name = "firstname") public String firstName;
 
-  @Column(name = "lastName") public String lastName;
+  @Column(name = "lastname") public String lastName;
+
+  @Column(name = "email") public String email;
 
   @Column(name = "enabled") public Boolean enabled;
 
@@ -79,6 +83,14 @@ import java.util.Collection;
     this.userRoles = userRoles;
   }
 
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(final String email) {
+    this.email = email;
+  }
+
   @Override public String toString() {
     return "User{" +
         "id=" + id +
@@ -86,6 +98,7 @@ import java.util.Collection;
         ", password='" + password + '\'' +
         ", firstName='" + firstName + '\'' +
         ", lastName='" + lastName + '\'' +
+        ", email='" + email + '\'' +
         ", enabled=" + enabled +
         ", userRoles=" + userRoles +
         '}';

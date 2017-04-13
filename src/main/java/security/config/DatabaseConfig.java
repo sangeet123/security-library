@@ -62,7 +62,7 @@ import java.util.Map;
     properties.put("hibernate.cache.use_query_cache",
         environment.getProperty("hibernate.cache.use_query_cache"));
     properties.put("hibernate.id.new_generator_mappings",
-        environment.getProperty("hibernate.id.new_generator_mappings=false"));
+        environment.getProperty("hibernate.id.new_generator_mappings"));
     return properties;
   }
 
